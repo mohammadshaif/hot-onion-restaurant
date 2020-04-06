@@ -1,6 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 const ChooseItem = ({item}) => {
   const {title, description, img, icon} = item;
   return (
@@ -15,7 +14,7 @@ const ChooseItem = ({item}) => {
                 <div>
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{description}</p>
-                    <h6>See more <FontAwesomeIcon icon={faArrowRight} /><i className="fas fa-arrow-right"></i> </h6>
+                    <h6>See more <i className="fas fa-arrow-right"></i> </h6>
                 </div>
             </div>
         </div>

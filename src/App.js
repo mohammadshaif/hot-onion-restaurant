@@ -1,41 +1,45 @@
 import React from 'react';
 import './App.css';
-// import Banner from './Components/Banner/Banner';
-// import ChooseUs from './Components/ChooseUs/ChooseUs';
-// import Footer from './Components/Footer/Footer';
-// import FooterTop from './Components/FooterTop/FooterTop';
-// import Food from './Components/Food/Food';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  // Link,
-  // useRouteMatch,
-  // useParams
-} from "react-router-dom";
-import HomePage from './Components/HomePage/HomePage';
-// import FoodDetails from './Components/Food/FoodDetails';
-import Foods from './Components/Food/Foods';
+import Header from './components/Header/Header';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './components/Page/HomePage';
+import SignUp from '../src/components/auth/SignUp/SignUp'
+import Login from '../src/components/auth/Login/Login'
+import Cart from './components/Cart/Cart';
+import NotFoundPage from './components/Page/NotFoundPage';
+import FoodDetails from './components/Food/FoodDetails';
+import { UserProvider } from './components/auth/useAuth';
+import UserProfile from './components/Page/UserProfile';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Checkout from './components/Cart/Checkout';
+import Foods from './components/Page/Foods';
+import Inventory from './components/Inventory/Inventory';
 
 function App() {
   return (
-    <div>
-     
-     <Router>
-          <Switch>
-            <Route exact path="/">
-              <HomePage></HomePage>
+   <UserProvider>
+    <Header/>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/signup" component={SignUp} />  
+      <Route path="/login" component={Login} />
+      <PrivateRoute path="/cart">
+            <Cart />
+      </PrivateRoute>
+      <PrivateRoute path="/checkout">
+            <Checkout />
+      </PrivateRoute>
+      <Route exact path="/foods/" component={Foods} />
+      <Route path="/inventory">
+              <Inventory></Inventory>
             </Route>
-            {/* <Route path="/foods/:FoodDetails">
-              <FoodDetails></FoodDetails>
-            </Route> */}
-            <Route path="/foods/" >
-                <Foods></Foods>
-            </Route>
-          </Switch>
-        </Router>
-     
-    </div>
+      <Route path="/foods/:id" component={FoodDetails} />
+      <PrivateRoute path="/user/profile">
+            <UserProfile />
+      </PrivateRoute>
+      <Route path="*" component={NotFoundPage} />
+    </Switch>
+   </UserProvider>
   );
 }
 

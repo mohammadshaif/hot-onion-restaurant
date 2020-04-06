@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import foods from '../../fakeData/foodData';
-// import './Food.css'
+import React, { useState, useEffect, useContext } from 'react';
+//import foods from '../../fakeData/foodData';
+import './Food.css'
 import FoodItem from './FoodItem';
-// import { UserContext} from '../auth/useAuth'
+import { UserContext} from '../auth/useAuth'
 import { withRouter } from 'react-router-dom';
 
 const Food = (props) => {
     
-    // const {cart} = useContext(UserContext)
-    // const [disabled, setDisabled] = useState(true)
-    // useEffect(()=> {
-    //             if(cart.length >0) {
-    //                 setDisabled(false)
-    //             }
-    // },[cart])
+    const {cart} = useContext(UserContext)
+    const [disabled, setDisabled] = useState(true)
+    useEffect(()=> {
+                if(cart.length >0) {
+                    setDisabled(false)
+                }
+    },[cart])
 
 
     const [activeCatagories, setActiveCatagories] = useState(
@@ -23,15 +23,33 @@ const Food = (props) => {
             breakfastActive: false
         }
     )
+      //  initials set data 
+      const [items, setItems] = useState([])    
     // item select category
     const [selectedItem, setSelectedItem] = useState('lunch')
-    //  initials set data 
-    const [items, setItems] = useState([])
+  
 
-    useEffect(() => {
-        const data = foods.filter(item => item.catagories === selectedItem)
-        setItems(data)
-    }, [selectedItem])
+    useEffect(()=>{
+        fetch('https://secret-tundra-37169.herokuapp.com/foods/')
+        .then(response => response.json())
+        .then(data => {
+          setItems(data)
+        })
+        
+    },[])
+    //console.log(items);
+    // useEffect(() => {
+    //     if (items.length) {
+    //     const data = items.filter(item => item.catagories === selectedItem)
+    //     setSelectedItem(data)
+    // }
+    // }, [items])
+
+    
+    // useEffect(() => {
+    //     const data = foods.filter(item => item.catagories === selectedItem)
+    //     setItems(data)
+    // }, [selectedItem])
 
     // conditionally set data when click catagories
     const selectHandler = item => {
@@ -85,10 +103,10 @@ const Food = (props) => {
                     {items.map(item => <FoodItem key={item.id} item={item} />)}
                     <div className="w-100"></div>
                     <div className="checkout-btn-aria m-auto">
-                        {/* <button 
+                        <button 
                             onClick={()=>props.history.push('/cart')}
                             className={disabled ? 'btn disabled my-4 text-center text-capitalize' :'btn checkout-btn  my-4 text-center text-capitalize' } 
-                         disabled={disabled} >Checkout your food</button> */}
+                         disabled={disabled} >Checkout your food</button>
                     </div>
                 </div>
             </div>
