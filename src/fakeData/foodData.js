@@ -186,5 +186,5 @@ const chooseData = [
     id:'2003',
   }
 ]
-export {chooseData};
+export { chooseData };
 export default foods;

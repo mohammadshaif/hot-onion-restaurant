@@ -37,3 +37,9 @@ p.subtitle.muted {
 .btn-cart:hover {
   color: #fff;
 }
+@media (max-width: 1200px) {
+	.input-cart-item {
+    padding: 0 0;
+    justify-content: space-between;
+  }
+}

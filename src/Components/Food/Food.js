@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-//import foods from '../../fakeData/foodData';
+import foods from '../../fakeData/foodData';
 import './Food.css'
 import FoodItem from './FoodItem';
 import { UserContext} from '../auth/useAuth'
 import { withRouter } from 'react-router-dom';
+import Loading from './Loading';
 
 const Food = (props) => {
     
@@ -27,17 +28,18 @@ const Food = (props) => {
       const [items, setItems] = useState([])    
     // item select category
     const [selectedItem, setSelectedItem] = useState('lunch')
+    const [isLoading, setIsLoading] = useState(false);
   
 
-    useEffect(()=>{
-        fetch('https://secret-tundra-37169.herokuapp.com/foods/')
-        .then(response => response.json())
-        .then(data => {
-          setItems(data)
-        })
+    // useEffect(()=>{
+    //     fetch('https://secret-tundra-37169.herokuapp.com/foods/')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       setItems(data)
+    //     })
         
-    },[])
-    //console.log(items);
+    // },[])
+    console.log(items);
     // useEffect(() => {
     //     if (items.length) {
     //     const data = items.filter(item => item.catagories === selectedItem)
@@ -46,11 +48,16 @@ const Food = (props) => {
     // }, [items])
 
     
-    // useEffect(() => {
-    //     const data = foods.filter(item => item.catagories === selectedItem)
-    //     setItems(data)
-    // }, [selectedItem])
-
+    useEffect(() => {
+        setIsLoading(true);
+        const data = foods.filter(item => item.catagories === selectedItem)
+        setIsLoading(false)
+        setItems(data)
+    }, [selectedItem])
+    
+    if (isLoading) {
+        return <Loading />
+      }
     // conditionally set data when click catagories
     const selectHandler = item => {
         if (item === 'breakfast') {

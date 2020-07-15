@@ -102,3 +102,8 @@ transition: .3s;
 p.see-all:hover {
 border-bottom: 1px solid salmon;
 }
+@media (max-width: 767px) {
+.see-all{
+  margin-right: 20px;
+}
+}

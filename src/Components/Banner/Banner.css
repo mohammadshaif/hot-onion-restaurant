@@ -24,3 +24,8 @@
 	padding: 6px 30px;
 	margin-left: -35px;
 }
+@media (max-width: 767px) {
+	.banner-content h2{
+	  font-size: 30px;
+	}
+	}

@@ -213,6 +213,8 @@ const handleSubmit = e => {
                             orderId && <div>
                                 <h3>Thank you for shopping with us</h3>
                                 <p>Your order id is: {orderId}</p>
+                                <img src="https://i.ibb.co/NytGHH3/8-ordercomplete.png" className="w-100" alt="8-ordercomplete" border="0"></img>
+
                             </div>
                         }
             </div>

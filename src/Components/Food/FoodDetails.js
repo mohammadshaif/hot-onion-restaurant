@@ -3,18 +3,22 @@ import './FoodDetails.css'
 import { useParams, Link } from 'react-router-dom';
 //import foods from '../../fakeData/foodData';
 import { UserContext } from '../auth/useAuth';
+import Loading from './Loading';
 
 const FoodDetails = (props) => {
   const {addToCart } = useContext(UserContext)
   const {id} = useParams()
   const [quantity, setQuantity] = useState(1)
   const [product, setProduct] = useState(null)
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(()=>{
+    setIsLoading(true);
     fetch('https://secret-tundra-37169.herokuapp.com/food/'+id)
     .then(response => response.json())
     .then(data => {
       setProduct(data)
+      setIsLoading(false)
     })
 },[])
 //  useEffect(()=>{
@@ -51,7 +55,9 @@ const FoodDetails = (props) => {
     }
   }
   // console.log(product.title);  
-
+  if (isLoading) {
+    return <Loading />
+  }
   return (
     <>
     {product ? (

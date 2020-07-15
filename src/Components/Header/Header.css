@@ -11,3 +11,15 @@
 .signup-btn:hover {
 	color: #fff;
 }
+
+@media (max-width: 767px) {
+	.logo-aria {
+		width: 80%;
+		margin: 10px;
+	}
+	.header-right div.d-flex button {
+		margin: 8px;
+		padding: 5px 10px;
+	}
+
+}

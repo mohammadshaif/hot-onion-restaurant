@@ -37,13 +37,19 @@ const handleSubmit = async (event) => {
 
 
   };
-
+  function refreshPage() {
+    setTimeout(() => {
+        window.location.reload(false);
+    }, 8000);
+    
+  }
 
 
   return (
+    
     <form onSubmit={handleSubmit}>
       <CardElement />
-      <button type="submit" disabled={!stripe}>
+      <button type="submit" onClick={refreshPage} disabled={!stripe}>
         Pay
       </button>
       {

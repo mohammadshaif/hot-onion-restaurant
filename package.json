@@ -1,6 +1,7 @@
 {
   "name": "hot-onion-restaurant",
   "version": "0.1.0",
+  "homepage": "https://www.onion.topbright.org/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
