@@ -9,8 +9,8 @@
    display:flex
   }
   .circle {
-    background-color:#353b48;
-    border-radius:50%;
+    background-color:#E51A4B;
+    border-radius:30%;
     height:15px;
     width:15px;
     margin:5px;

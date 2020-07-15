@@ -9,7 +9,7 @@ import { withRouter, Link } from 'react-router-dom';
 import CheckoutForm from '../CheckoutForm/CheckoutForm';
 
 const Cart = (props) => {
-  const { cart, checkOutOrder } = useContext(UserContext)
+  const { cart, checkOutOrder, setFinalOrderId } = useContext(UserContext)
 
   const [address, setAddress] = useState('')
   const [homeNo, setHomeNo] = useState('')
@@ -71,7 +71,7 @@ const Cart = (props) => {
      }
     console.log('oi beta',orderDetails);
       
-    // checkOutOrder()
+    checkOutOrder()
   
     // props.history.push('/checkout')
     fetch('https://secret-tundra-37169.herokuapp.com/placeOrder', {
@@ -192,7 +192,7 @@ const handleSubmit = e => {
                 <button 
                   type="submit" 
                   disabled={disabled} 
-                  className={disabled ? 'btn place-order-btn-disable': 'btn sign-up-btn w-100'} 
+                 className={disabled ? 'btn place-order-btn-disable': 'btn sign-up-btn w-100'} 
                   // className="btn sign-up-btn w-100" 
                   onClick={handleCheckout} >Place Order</button>
               </div>
@@ -200,23 +200,44 @@ const handleSubmit = e => {
           </div>
         </div>
       </div>
-     
-          <div className="col-md-5"
-                style={{ marginTop: '100px', display: shipInfo ? 'block' : 'none' }} 
+        
+             <div className="col-md-12 text-center"
+                style={{ marginTop: '50px', display: shipInfo ? 'block' : 'none' }} 
                 >
-                <h3>Payment Information</h3>
-                <Elements stripe={stripePromise}>
-                    <CheckoutForm handlePlaceOrder={handlePlaceOrder} ></CheckoutForm>
-                </Elements>
-                <br/>
+                <div className="row">
+                <div className="col-md-6">
+                        <div className="pay-bg">
+                            <div className="delivery-details">
+                              <h3>Your Delivery Details </h3>
+                            </div>
+                            <h5> Delivery Address</h5>
+                            <p> {address},House No: {homeNo}, Flat No: {flatNo}  </p>
+                            <h5>Business Name</h5>
+                            <p>{name}</p>
+
+                        </div>
+                  </div>
+
+                  <div className="col-md-6">
+                        <div className="pay-bg">
+                              <h3 style={{"marginBottom":"10px","fontSize":"45px","color":"#E51A4B","fontFamily":"auto"}}>Payment Information</h3>
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm id={orderId} handlePlaceOrder={handlePlaceOrder} ></CheckoutForm>
+                            </Elements>
+                            <br/>
                         {
                             orderId && <div>
-                                <h3>Thank you for shopping with us</h3>
-                                <p>Your order id is: {orderId}</p>
-                                <img src="https://i.ibb.co/NytGHH3/8-ordercomplete.png" className="w-100" alt="8-ordercomplete" border="0"></img>
+                                <h3>Thanks for you order!</h3>
+                                <h6 style={{'color': 'green','font-family': 'auto'}}>Your order id is</h6>
+                                <h4 style={{'color': 'green','font-family': 'auto'}}> {orderId}</h4>
+                                <Link to="/"><button className="mt-3 btn signup-btn primary-btn">Order something more</button></Link>
 
                             </div>
                         }
+                        </div>
+                  </div>
+                  
+                </div>
             </div>
           </div>
       

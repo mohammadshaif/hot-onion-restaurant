@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 
+import './CheckOutFrom.css'
 //import {loadStripe} from '@stripe/stripe-js';
 import {
   CardElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { withRouter } from 'react-router-dom';
+import { UserContext } from '../auth/useAuth';
+import { useContext } from 'react';
+
 
 const CheckoutForm = (props) => {
-
+const {checkOutOrder} = useContext(UserContext)
       //my code
   const [paymentError, setPaymentError] = useState(null);
   const [paymentFinished, setPaymentFinished]= useState(null);
@@ -37,28 +42,31 @@ const handleSubmit = async (event) => {
 
 
   };
-  function refreshPage() {
-    setTimeout(() => {
-        window.location.reload(false);
-    }, 8000);
-    
-  }
+
+  // function refreshPage() {
+  //   checkOutOrder()
+
+  //   // setTimeout(() => {
+  //   //     window.location.reload(false);
+  //   // }, 8000);
+  //  props.history.push('checkout')
+  // }
 
 
   return (
     
     <form onSubmit={handleSubmit}>
       <CardElement />
-      <button type="submit" onClick={refreshPage} disabled={!stripe}>
+      <button type="submit" className='payBtn' disabled={!stripe}>
         Pay
       </button>
       {
           paymentError && <p style={{color:'red'}} > {paymentError} </p>
       }
       {
-          paymentFinished && <p style={{color:'green'}} > Payment Successful</p>
+          paymentFinished && <p style={{color:'green',fontSize: '20px'}} > Payment Successful</p>
       }
     </form>
   );
 };
-export default CheckoutForm;
+export default withRouter (CheckoutForm);

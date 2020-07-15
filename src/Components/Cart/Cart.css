@@ -17,3 +17,11 @@
   width: 100%;
   padding: 10px 0;
 }
+button:focus {
+  outline: none;
+}
+.pay-bg {background-color: #F5F5F5;
+    padding: 30px 30px;
+    margin: 0px 30px;
+    box-shadow: 1px 5px 10px #80808047;
+    border-radius: 20px;}

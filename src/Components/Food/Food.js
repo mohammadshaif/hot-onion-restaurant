@@ -107,7 +107,7 @@ const Food = (props) => {
                     </div>
                 </div>
                 <div className="row food-items">
-                    {items.map(item => <FoodItem key={item.id} item={item} />)}
+                    {items.map(item => <FoodItem key={item.id} food={item} />)}
                     <div className="w-100"></div>
                     <div className="checkout-btn-aria m-auto">
                         <button 

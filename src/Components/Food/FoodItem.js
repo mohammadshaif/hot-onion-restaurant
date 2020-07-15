@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const FoodItem = (props) => {
-  const {title, img, subtitle, price, id} = props.item;
+  const {title, img, subtitle, price, id} = props.food;
   return (
       <div className="col-xl-4" onClick={()=>props.history.push(`/foods/${id}`)}>
         <div className="single-item text-center m-4">
